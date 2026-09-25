@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>سوبر ماركت الزهران | لوحة النشر</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--green:#1b8a3f;--green2:#0f6b2f;--gold:#f5b301;--bg:#f4f7f4;--txt:#1d2b22;--mut:#6b7a6f;--rad:16px;--sh:0 6px 20px rgba(20,60,30,.10)}
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Tajawal',system-ui,sans-serif}
+body{background:var(--bg);color:var(--txt);min-height:100vh}
+#demoBanner{background:linear-gradient(90deg,#f5b301,#ffd34d);color:#3a2c00;padding:8px 14px;font-size:12.5px;font-weight:800;text-align:center;line-height:1.7}
+header{background:linear-gradient(135deg,var(--green),var(--green2));color:#fff;padding:12px 18px;display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:50;box-shadow:var(--sh)}
+header .logo{font-size:26px}header h1{font-size:18px;font-weight:900}header small{opacity:.85;font-size:12px;font-weight:700}
+header .sp{flex:1}header button{background:rgba(255,255,255,.15);color:#fff;border:0;border-radius:10px;padding:8px 12px;font-weight:700;cursor:pointer;font-size:12px}
+nav.tabs{display:flex;gap:6px;padding:10px 12px;overflow-x:auto;background:#fff;border-bottom:1px solid #e3e8e3;position:sticky;top:54px;z-index:40}
+nav.tabs button{flex:0 0 auto;border:0;background:#eef4ee;color:var(--green2);padding:10px 16px;border-radius:999px;font-size:14px;font-weight:800;cursor:pointer}
+nav.tabs button.active{background:var(--green);color:#fff;box-shadow:var(--sh)}
+main{max-width:1080px;margin:auto;padding:16px}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(230px,1fr))}
+.card{background:#fff;border-radius:var(--rad);box-shadow:var(--sh);overflow:hidden;display:flex;flex-direction:column}
+.card .imgwrap{position:relative}.card img{width:100%;height:150px;object-fit:cover;background:#eee;display:block}
+.card .body{padding:10px 12px;display:flex;flex-direction:column;gap:6px;flex:1}
+.price{color:var(--green2);font-weight:900;font-size:16px}.old{text-decoration:line-through;color:var(--mut);font-size:12px;margin-inline-start:6px}
+.chip{align-self:flex-start;background:#eef4ee;color:var(--green2);border-radius:999px;padding:3px 10px;font-size:11px;font-weight:700}
+.badge{position:absolute;top:8px;inset-inline-start:8px;background:var(--gold);color:#3a2c00;border-radius:999px;padding:4px 10px;font-size:11px;font-weight:900;box-shadow:var(--sh)}
+.desc{font-size:12px;color:var(--mut);line-height:1.6}
+.actions{display:flex;gap:8px;margin-top:auto}
+.actions button{flex:1;border:0;border-radius:10px;padding:8px;cursor:pointer;font-weight:800;font-size:12px}
+.btn{background:var(--green);color:#fff;border:0;border-radius:12px;padding:12px 22px;font-size:15px;font-weight:900;cursor:pointer;box-shadow:var(--sh)}
+.btn.gold{background:var(--gold);color:#3a2c00}.btn.ghost{background:#eef4ee;color:var(--green2)}.btn.danger{background:#e5484d;color:#fff}
+form.pub{background:#fff;border-radius:var(--rad);box-shadow:var(--sh);padding:18px;display:grid;gap:12px;grid-template-columns:1fr 1fr}
+form.pub .full{grid-column:1/-1}
+label{font-size:13px;font-weight:800;color:var(--mut);display:block;margin-bottom:4px}
+input,select,textarea{width:100%;border:1.5px solid #dfe7df;border-radius:10px;padding:10px 12px;font-size:14px;background:#fbfdfb}
+input:focus,select:focus,textarea:focus{outline:2px solid #bfe3c8;border-color:var(--green)}
+#imgPreview{width:100%;max-height:180px;object-fit:cover;border-radius:12px;border:1.5px dashed #cfd9cf;background:#f2f6f2}
+.stats{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));margin-bottom:16px}
+.stat{background:#fff;border-radius:var(--rad);box-shadow:var(--sh);padding:16px;text-align:center}
+.stat b{font-size:26px;color:var(--green2);display:block}.stat span{color:var(--mut);font-size:13px}
+.login{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;background:linear-gradient(160deg,#eaf6ec,#f7fbf7)}
+.login .box{background:#fff;border-radius:20px;box-shadow:var(--sh);padding:28px;width:100%;max-width:380px;text-align:center;display:grid;gap:12px}
+.demoNote{background:#fff8e6;border:1.5px dashed var(--gold);border-radius:12px;padding:10px;font-size:12px;color:#6b5200;font-weight:700}
+#toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:#1d2b22;color:#fff;padding:12px 22px;border-radius:999px;font-weight:800;opacity:0;pointer-events:none;transition:.3s;z-index:99;max-width:90vw;text-align:center}
+#toast.show{opacity:1;bottom:32px}
+.hidden{display:none!important}
+.filters{display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap}.filters input,.filters select{flex:1;min-width:160px}
+.panel{background:#fff;border-radius:var(--rad);box-shadow:var(--sh);padding:18px;display:grid;gap:12px}
+.catItem{display:flex;align-items:center;gap:10px;background:#f7faf7;border-radius:12px;padding:10px 14px;font-weight:700}
+.catItem button{margin-inline-start:auto;border:0;background:#fde8e8;color:#c02a2a;border-radius:8px;padding:6px 10px;cursor:pointer;font-weight:800}
+.projectId{background:#eef4ee;color:var(--green2);border-radius:8px;padding:4px 10px;font-size:11px;font-weight:700;margin-top:6px;display:inline-block}
+@media(max-width:640px){form.pub{grid-template-columns:1fr}header h1{font-size:15px}.grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}.card img{height:120px}}
+</style>
+</head>
+<body>
+
+<div id="loginScreen" class="login hidden">
+  <div class="box">
+    <div style="font-size:44px">🛒</div>
+    <h2>سوبر ماركت الزهران</h2>
+    <p style="color:var(--mut);font-size:13px">لوحة نشر المنتجات والعروض — دخول صاحب المتجر</p>
+    <div class="projectId" id="projectIdTag"></div>
+    <div id="demoNote" class="demoNote hidden">🔓 وضع المعاينة: لا يحتاج حسابًا، اضغط الزر الذهبي للدخول.</div>
+    <input id="loginEmail" type="email" placeholder="اسم المستخدم أو البريد">
+    <input id="loginPass" type="password" placeholder="كلمة المرور">
+    <button class="btn" id="loginBtn">دخول</button>
+    <button class="btn gold hidden" id="demoLoginBtn">🔓 دخول وضع المعاينة</button>
+    <p id="loginErr" style="color:#c02a2a;font-size:13px;font-weight:700"></p>
+  </div>
+</div>
+
+<div id="app" class="hidden">
+<div id="demoBanner" class="hidden">🔓 وضع المعاينة التجريبي — البيانات تُحفظ على متصفحك فقط.</div>
+<header>
+  <span class="logo">🛒</span>
+  <div><h1 id="hdrName">سوبر ماركت الزهران</h1><small id="ownerRole">لوحة الإدارة</small></div>
+  <span class="sp"></span>
+  <button id="logoutBtn">خروج ⎋</button>
+</header>
+
+<nav class="tabs" id="tabsNav">
+  <button data-tab="dashboard" class="active">📊 لوحة التحكم</button>
+  <button data-tab="publish">🚀 نشر جديد</button>
+  <button data-tab="products">📦 المنتجات</button>
+  <button data-tab="offers">🔥 العروض</button>
+  <button data-tab="categories">🗂️ الأقسام</button>
+  <button data-tab="settings">⚙️ الإعدادات</button>
+</nav>
+
+<main>
+  <section id="tab-dashboard">
+    <div class="stats">
+      <div class="stat"><b id="statProducts">0</b><span>منتج منشور</span></div>
+      <div class="stat"><b id="statOffers">0</b><span>عرض فعّال</span></div>
+      <div class="stat"><b id="statCats">0</b><span>قسم</span></div>
+      <div class="stat"><b id="statLast" style="font-size:14px">—</b><span>آخر نشر</span></div>
+    </div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <button class="btn" onclick="openTab('publish')">🚀 نشر منتج / عرض الآن</button>
+      <button class="btn ghost" onclick="openTab('products')">إدارة المنتجات</button>
+      <button class="btn gold" onclick="openTab('offers')">إدارة العروض</button>
+    </div>
+  </section>
+
+  <section id="tab-publish" class="hidden">
+    <form class="pub" id="pubForm">
+      <div class="full">
+        <label>صورة المنتج (تُضغط تلقائيًا — مجانية)</label>
+        <input type="file" id="fImage" accept="image/*">
+        <img id="imgPreview" class="hidden" style="margin-top:8px">
+      </div>
+      <div><label>اسم المنتج *</label><input id="fName" required placeholder="مثال: فول مدمس Durra 400غ"></div>
+      <div><label>القسم *</label><select id="fCategory" required></select></div>
+      <div><label>السعر *</label><input id="fPrice" type="number" min="0" required placeholder="0"></div>
+      <div><label>الوحدة</label><select id="fUnit">
+        <option>قطعة</option><option>كغ</option><option>غ</option><option>ليتر</option><option>مل</option><option>علبة</option><option>كيس</option><option>عبوة</option><option>كرتونة</option>
+      </select></div>
+      <div id="oldRow" class="hidden"><label>السعر قبل العرض (للشطب)</label><input id="fOld" type="number" min="0" placeholder="0"></div>
+      <div class="full"><label>نص مرافق (وصف قصير)</label><textarea id="fDesc" rows="2" placeholder="مثال: جاهز للأكل مباشرة، نوعية ممتازة"></textarea></div>
+      <div class="full">
+        <label>مكان النشر</label>
+        <select id="fTarget"><option value="products">📦 منتجات عادية</option><option value="offers">🔥 قسم العروض</option></select>
+      </div>
+      <div class="full" style="display:flex;gap:10px">
+        <button type="submit" class="btn" id="submitBtn">🚀 نشر الآن</button>
+        <button type="button" class="btn ghost hidden" id="cancelEdit">إلغاء التعديل</button>
+      </div>
+    </form>
+  </section>
+
+  <section id="tab-products" class="hidden">
+    <div class="filters">
+      <input id="pSearch" placeholder="🔍 بحث باسم المنتج...">
+      <select id="pFilterCat"></select>
+    </div>
+    <div class="grid" id="productsGrid"></div>
+  </section>
+
+  <section id="tab-offers" class="hidden"><div class="grid" id="offersGrid"></div></section>
+
+  <section id="tab-categories" class="hidden">
+    <div class="panel">
+      <label>إضافة قسم جديد</label>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <input id="catIcon" placeholder="أيقونة (إيموجي)" style="max-width:120px">
+        <input id="catName" placeholder="اسم القسم" style="flex:1;min-width:180px">
+        <button class="btn" id="catAddBtn" type="button">+ إضافة</button>
+      </div>
+      <div id="catsList" style="display:grid;gap:8px"></div>
+    </div>
+  </section>
+
+  <section id="tab-settings" class="hidden">
+    <div class="panel">
+      <label>معلومات المتجر (تظهر بالتطبيق)</label>
+      <div style="display:grid;gap:10px;grid-template-columns:1fr 1fr">
+        <input id="sName" placeholder="اسم المتجر">
+        <input id="sPhone" placeholder="رقم الهاتف / واتساب">
+        <input id="sAddress" placeholder="العنوان (إدلب - ...)">
+        <input id="sCurrency" placeholder="العملة مثال: ل.س">
+      </div>
+      <button class="btn" id="saveSettingsBtn" type="button">💾 حفظ المعلومات</button>
+      <hr style="border:0;border-top:1px solid #e3e8e3">
+      <label>وضع تخزين الصور</label>
+      <select id="sStorage">
+        <option value="base64">✅ مجاني: ضغط وتخزين داخل القاعدة (موصى به الآن)</option>
+        <option value="imgbb">🌐 مجاني: رفع على ImgBB (يتطلب مفتاح)</option>
+        <option value="storage">☁️ Firebase Storage (يتطلب خطة Blaze)</option>
+      </select>
+      <input id="sImgbbKey" class="hidden" placeholder="مفتاح ImgBB API المجاني">
+      <hr style="border:0;border-top:1px solid #e3e8e3">
+      <button class="btn gold" id="seedBtn" type="button">🧪 تعبئة منتجات تجريبية</button>
+      <button class="btn danger hidden" id="resetDemoBtn" type="button">🧹 تصفير بيانات المعاينة</button>
+    </div>
+    <div class="panel" style="margin-top:14px">
+      <label>📱 ربط التطبيق بالمشروع</label>
+      <p style="font-size:13px;color:var(--mut);line-height:1.9">
+        هذا الملف مرتبط فعليًا بمشروع <b style="color:var(--green2)">zahran-6725f</b>. عند بناء التطبيق عبر AI Studio، أرفق هذا الملف كما هو مع التلقين الرئيسي،
+        وسيستخرج الذكاء نفس الإعدادات ويستخدمها داخل التطبيق. بهذه الطريقة أي نشر على الموقع يظهر في التطبيق خلال ثوانٍ.
+      </p>
+    </div>
+  </section>
+</main>
+</div>
+<div id="toast"></div>
+
+<script type="module">
+/* ========== إعدادات Firebase الحقيقية لمشروع الزهران ========== */
+const firebaseConfig = {
+  apiKey: "AIzaSyBZx5AUVTNWM-0Z_LJITXwJHqJE9xxK-2w",
+  authDomain: "zahran-6725f.firebaseapp.com",
+  projectId: "zahran-6725f",
+  storageBucket: "zahran-6725f.firebasestorage.app",
+  messagingSenderId: "63592476749",
+  appId: "1:63592476749:web:15bf357edb6a9ec5ceac04",
+  measurementId: "G-4X95LED55E"
+};
+/* ========================================================= */
+const DEMO = !firebaseConfig.projectId || firebaseConfig.projectId === 'PROJECT_ID';
+
+const $=s=>document.querySelector(s);
+const esc=s=>String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fmtN=n=>Number(n||0).toLocaleString('en-US');
+function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2600);}
+function placeholder(name){const cols=['#1b8a3f','#f5b301','#e07b39','#7a4de0','#2a9db0'];const c=cols[(name.length||1)%cols.length];
+const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400"><rect width="600" height="400" fill="${c}"/><text x="300" y="210" font-size="40" fill="#fff" text-anchor="middle" font-family="sans-serif" font-weight="bold">${esc(name).slice(0,20)}</text></svg>`;
+return 'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);}
+
+const DEFAULT_CATS=[['بقوليات','🫘'],['مكسرات','🥜'],['ملوخية ومجففات','🌿'],['معلبات','🥫'],['منظفات','🧼'],['العناية الشخصية','🧴'],['زيوت وسمن','🫒'],['توابل وبهارات','🌶️'],['حبوب وطحين','🌾'],['سكر وملح','🧂'],['مشروبات وعصائر','🧃'],['شاي وقهوة','☕'],['حلويات وسناكس','🍪'],['أجبان وألبان','🧀'],['أدوات منزلية','🍽️'],['مستلزمات أطفال','🍼']];
+const SEED_P=[['فول مدمس Durra – 400 غ','معلبات',21000,'علبة','جاهز للأكل مباشرة، نوعية دورا المميزة'],['عدس مجروش – 1 كغ','بقوليات',14500,'كغ','عدس أحمر ممتاز'],['فستق حلبي محمص – 500 غ','مكسرات',95000,'علبة','مملح ومحمص'],['ملوخية مجففة – 250 غ','ملوخية ومجففات',18000,'علبة','بلدية نظيفة'],['مسحوق غسيل أوتوماتيك – 3 كغ','منظفات',42000,'علبة',''],['زيت زيتون بكر – 1 ليتر','زيوت وسمن',68000,'ليتر',''],['شاي أسود – 500 غ','شاي وقهوة',35000,'علبة',''],['تونة قطع – 185 غ','معلبات',16500,'علبة',''],['حليب مجفف – 900 غ','أجبان وألبان',52000,'علبة',''],['معجون بندورة – 800 غ','معلبات',12500,'علبة','']];
+const SEED_O=[['رز بسمتي – 5 كغ','حبوب وطحين',78000,92000,'كيس','عرض الأسبوع'],['صابون يد سائل – 1 ليتر','منظفات',15500,19000,'عبوة','']];
+
+let products=[],offers=[],cats=[],API=null,editing=null,settingsFilled=false;
+let settings={storeName:'سوبر ماركت الزهران',phone:'',address:'',currency:'ل.س',storageMode:'base64',imgbbKey:''};
+
+const KEY='zahran_demo_db_v1'; let LDB=null;
+function seedDB(){const now=Date.now();const o={products:[],offers:[],categories:[],settings:{storeName:'سوبر ماركت الزهران',phone:'09xx xxx xxx',address:'إدلب – الشارع الرئيسي',currency:'ل.س',storageMode:'base64',imgbbKey:''}};
+DEFAULT_CATS.forEach(([name,icon],i)=>o.categories.push({id:'c'+i,name,icon}));
+SEED_P.forEach(([name,category,price,unit,desc],i)=>o.products.push({id:'p'+i,name,category,price,unit,desc,oldPrice:0,image:placeholder(name),createdAt:now-i*1000,active:true}));
+SEED_O.forEach(([name,category,price,oldPrice,unit,desc],i)=>o.offers.push({id:'o'+i,name,category,price,oldPrice,unit,desc,image:placeholder(name),createdAt:now-i*1000,active:true}));
+return o;}
+function lLoad(){if(!LDB){try{LDB=JSON.parse(localStorage.getItem(KEY));}catch(e){LDB=null;} if(!LDB)LDB=seedDB(); lSave();} return LDB;}
+function lSave(){try{localStorage.setItem(KEY,JSON.stringify(LDB));}catch(e){alert('ذاكرة المتصفح ممتلئة.');}}
+function makeLocalAPI(){
+ const subs={products:[],offers:[],categories:[],settings:[]}; let user=null; const authCbs=[];
+ const cur=col=>{if(col==='settings')return {...LDB.settings}; const a=LDB[col].slice(); if(col!=='categories')a.sort((x,y)=>(y.createdAt||0)-(x.createdAt||0)); return a;};
+ const emit=col=>subs[col].slice().forEach(cb=>cb(cur(col)));
+ const sub=col=>cb=>{subs[col].push(cb);cb(cur(col));return()=>{};};
+ return{
+  onProducts:sub('products'),onOffers:sub('offers'),onCategories:sub('categories'),onSettings:sub('settings'),
+  onAuth:cb=>{authCbs.push(cb);setTimeout(()=>cb(user),30);return()=>{};},
+  login:()=>{user={email:'demo@zahran.local'};authCbs.forEach(c=>c(user));return Promise.resolve();},
+  logout:()=>{user=null;authCbs.forEach(c=>c(null));},
+  add:async(col,data)=>{const id='d'+Date.now().toString(36)+Math.random().toString(36).slice(2,6);LDB[col].push({...data,id,createdAt:Date.now()});lSave();emit(col);return id;},
+  update:async(col,id,data)=>{const it=LDB[col].find(x=>x.id===id);if(it)Object.assign(it,data);lSave();emit(col);},
+  remove:async(col,id)=>{LDB[col]=LDB[col].filter(x=>x.id!==id);lSave();emit(col);},
+  setSettings:async obj=>{Object.assign(LDB.settings,obj);lSave();emit('settings');},
+  resetDemo:()=>{LDB=seedDB();lSave();['products','offers','categories','settings'].forEach(emit);}
+ };}
+
+async function makeFirebaseAPI(){
+ const base='https://www.gstatic.com/firebasejs/10.12.2/';
+ const [mA,mAu,mF,mS]=await Promise.all([import(base+'firebase-app.js'),import(base+'firebase-auth.js'),import(base+'firebase-firestore.js'),import(base+'firebase-storage.js')]);
+ const app=mA.initializeApp(firebaseConfig); const db=mF.getFirestore(app); const auth=mAu.getAuth(app);
+ return{
+  onProducts:cb=>mF.onSnapshot(mF.query(mF.collection(db,'products'),mF.orderBy('createdAt','desc')),s=>cb(s.docs.map(d=>({id:d.id,...d.data()})))),
+  onOffers:cb=>mF.onSnapshot(mF.query(mF.collection(db,'offers'),mF.orderBy('createdAt','desc')),s=>cb(s.docs.map(d=>({id:d.id,...d.data()})))),
+  onCategories:cb=>mF.onSnapshot(mF.collection(db,'categories'),s=>cb(s.docs.map(d=>({id:d.id,...d.data()})))),
+  onSettings:cb=>mF.onSnapshot(mF.doc(db,'settings','main'),s=>cb(s.exists()?s.data():{})),
+  onAuth:cb=>mAu.onAuthStateChanged(auth,cb),
+  login:(e,p)=>mAu.signInWithEmailAndPassword(auth,e,p),
+  logout:()=>mAu.signOut(auth),
+  add:(col,data)=>mF.addDoc(mF.collection(db,col),{...data,createdAt:Date.now(),active:true}).then(r=>r.id),
+  update:(col,id,data)=>mF.updateDoc(mF.doc(db,col,id),data),
+  remove:(col,id)=>mF.deleteDoc(mF.doc(db,col,id)),
+  setSettings:obj=>mF.setDoc(mF.doc(db,'settings','main'),obj,{merge:true}),
+  auth,db
+ };}
+
+function compressImage(file){return new Promise((res,rej)=>{const img=new Image();const url=URL.createObjectURL(file);
+img.onload=()=>{const tries=[[900,.8],[800,.7],[640,.6],[520,.5]];let out='';
+for(const[dim,q]of tries){let w=img.width,h=img.height;const sc=Math.min(1,dim/Math.max(w,h));w=Math.round(w*sc);h=Math.round(h*sc);
+const c=document.createElement('canvas');c.width=w;c.height=h;c.getContext('2d').drawImage(img,0,0,w,h);out=c.toDataURL('image/jpeg',q);
+if(out.length<900000)break;} URL.revokeObjectURL(url);res(out);};
+img.onerror=rej;img.src=url;});}
+async function uploadImage(file,name){
+ const data=await compressImage(file); const mode=settings.storageMode||'base64';
+ if(DEMO)return data;
+ if(mode==='imgbb'&&settings.imgbbKey){const fd=new FormData();fd.append('key',settings.imgbbKey);fd.append('image',data.split(',')[1]);
+  const r=await fetch('https://api.imgbb.com/1/upload',{method:'POST',body:fd});const j=await r.json();if(j.success)return j.data.url;throw new Error('ImgBB فشل');}
+ return data;}
+
+function cardHTML(it,col){const cur=settings.currency||'';const disc=it.oldPrice>it.price?Math.round((1-it.price/it.oldPrice)*100):0;
+return `<div class="card"><div class="imgwrap"><img src="${it.image||placeholder(it.name)}" loading="lazy">
+${col==='offers'?`<span class="badge">🔥 عرض ${disc?fmtN(disc)+'%':''}</span>`:''}</div>
+<div class="body"><span class="chip">${esc(it.category)}</span><b>${esc(it.name)}</b>
+<div><span class="price">${fmtN(it.price)} ${esc(cur)}</span>${it.oldPrice>it.price?`<span class="old">${fmtN(it.oldPrice)}</span>`:''}
+<span style="font-size:11px;color:var(--mut)"> / ${esc(it.unit||'قطعة')}</span></div>
+${it.desc?`<p class="desc">${esc(it.desc)}</p>`:''}
+<div class="actions"><button style="background:#eef4ee;color:var(--green2)" data-edit="${it.id}" data-col="${col}">✏️ تعديل</button>
+<button style="background:#fde8e8;color:#c02a2a" data-del="${it.id}" data-col="${col}">🗑️ حذف</button></div></div></div>`;}
+function renderProducts(){const q=($('#pSearch').value||'').trim();const f=$('#pFilterCat').value;
+$('#productsGrid').innerHTML=products.filter(p=>(!q||p.name.includes(q))&&(!f||p.category===f)).map(p=>cardHTML(p,'products')).join('')||'<p style="color:var(--mut)">لا توجد منتجات — ابدأ بالنشر 🚀</p>';}
+function renderOffers(){$('#offersGrid').innerHTML=offers.map(p=>cardHTML(p,'offers')).join('')||'<p style="color:var(--mut)">لا توجد عروض حاليًا</p>';}
+function renderCats(){const opts=cats.map(c=>`<option value="${esc(c.name)}">${esc(c.icon||'🏷️')} ${esc(c.name)}</option>`).join('');
+$('#fCategory').innerHTML=opts;$('#pFilterCat').innerHTML='<option value="">كل الأقسام</option>'+opts;
+$('#catsList').innerHTML=cats.map(c=>`<div class="catItem"><span>${esc(c.icon||'🏷️')}</span><span>${esc(c.name)}</span><button data-catdel="${c.id}">حذف</button></div>`).join('');}
+function stats(){$('#statProducts').textContent=products.length;$('#statOffers').textContent=offers.length;$('#statCats').textContent=cats.length;
+const last=Math.max(0,...[...products,...offers].map(x=>x.createdAt||0));
+if(last){const d=new Date(last);$('#statLast').textContent=fmtN(d.getDate())+'/'+fmtN(d.getMonth()+1)+'/'+fmtN(d.getFullYear());}else{$('#statLast').textContent='—';}}
+window.openTab=t=>{document.querySelectorAll('#tabsNav button').forEach(b=>b.classList.toggle('active',b.dataset.tab===t));
+['dashboard','publish','products','offers','categories','settings'].forEach(x=>$('#tab-'+x).classList.toggle('hidden',x!==t));};
+document.querySelectorAll('#tabsNav button').forEach(b=>b.onclick=()=>openTab(b.dataset.tab));
+
+$('#fImage').onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{const p=$('#imgPreview');p.src=r.result;p.classList.remove('hidden');};r.readAsDataURL(f);};
+$('#fTarget').onchange=e=>$('#oldRow').classList.toggle('hidden',e.target.value!=='offers');
+$('#pSearch').oninput=renderProducts;$('#pFilterCat').onchange=renderProducts;
+$('#cancelEdit').onclick=resetForm;
+function resetForm(){editing=null;$('#pubForm').reset();$('#imgPreview').classList.add('hidden');$('#oldRow').classList.add('hidden');
+$('#submitBtn').textContent='🚀 نشر الآن';$('#cancelEdit').classList.add('hidden');}
+
+$('#pubForm').onsubmit=async e=>{e.preventDefault();
+const name=$('#fName').value.trim(),price=Number($('#fPrice').value),col=$('#fTarget').value;
+if(!name)return toast('⚠️ أدخل اسم المنتج');
+let image=editing?editing.image:placeholder(name);
+const file=$('#fImage').files[0];
+if(file){toast('⏳ جاري ضغط الصورة...');image=await uploadImage(file,name);}
+const data={name,price,oldPrice:col==='offers'?Number($('#fOld').value||0):0,unit:$('#fUnit').value,category:$('#fCategory').value,desc:$('#fDesc').value.trim(),image,updatedAt:Date.now()};
+try{ if(editing)await API.update(editing.col,editing.id,data); else await API.add(col,data);
+toast(DEMO?'✅ تم النشر (معاينة محلية)':'✅ تم النشر — ظهر مباشرة في التطبيق');resetForm();}catch(err){toast('❌ '+err.message);}};
+
+function bindGrid(id){$('#'+id).onclick=async e=>{
+const ed=e.target.closest('[data-edit]'),dl=e.target.closest('[data-del]'),cd=e.target.closest('[data-catdel]');
+if(ed){const col=ed.dataset.col;const it=(col==='products'?products:offers).find(x=>x.id===ed.dataset.edit);
+editing={id:it.id,col};$('#fName').value=it.name;$('#fPrice').value=it.price;$('#fOld').value=it.oldPrice||'';$('#fUnit').value=it.unit||'قطعة';
+$('#fDesc').value=it.desc||'';$('#fTarget').value=col;$('#oldRow').classList.toggle('hidden',col!=='offers');
+const p=$('#imgPreview');p.src=it.image||placeholder(it.name);p.classList.remove('hidden');
+$('#submitBtn').textContent='💾 حفظ التعديلات';$('#cancelEdit').classList.remove('hidden');openTab('publish');}
+if(dl){if(confirm('حذف نهائي؟'))await API.remove(dl.dataset.col,dl.dataset.del);}
+if(cd){if(confirm('حذف القسم؟'))await API.remove('categories',cd.dataset.catdel);}};}
+bindGrid('productsGrid');bindGrid('offersGrid');bindGrid('catsList');
+
+$('#catAddBtn').onclick=async()=>{const n=$('#catName').value.trim();if(!n)return;
+await API.add('categories',{name:n,icon:$('#catIcon').value.trim()||'🏷️'});$('#catName').value='';$('#catIcon').value='';toast('✅ أُضيف القسم');};
+$('#saveSettingsBtn').onclick=async()=>{await API.setSettings({storeName:$('#sName').value,phone:$('#sPhone').value,address:$('#sAddress').value,currency:$('#sCurrency').value,storageMode:$('#sStorage').value,imgbbKey:$('#sImgbbKey').value});toast('💾 تم الحفظ');};
+$('#sStorage').onchange=e=>$('#sImgbbKey').classList.toggle('hidden',e.target.value!=='imgbb');
+$('#seedBtn').onclick=async()=>{
+for(let i=0;i<SEED_P.length;i++){const[name,category,price,unit,desc]=SEED_P[i];await API.add('products',{name,category,price,unit,desc,oldPrice:0,image:placeholder(name)});}
+for(let i=0;i<SEED_O.length;i++){const[name,category,price,oldPrice,unit,desc]=SEED_O[i];await API.add('offers',{name,category,price,oldPrice,unit,desc,image:placeholder(name)});}
+toast('🧪 تمت التعبئة');};
+$('#resetDemoBtn').onclick=()=>{if(confirm('إعادة بيانات المعاينة الأصلية؟'))API.resetDemo();};
+$('#loginBtn').onclick=async()=>{$('#loginErr').textContent='';
+try{await API.login($('#loginEmail').value.trim(),$('#loginPass').value);}catch(e){$('#loginErr').textContent='بيانات الدخول غير صحيحة';}};
+$('#demoLoginBtn').onclick=()=>API.login();
+$('#logoutBtn').onclick=()=>API.logout();
+
+function startListeners(){
+ API.onAuth(u=>{if(u){$('#loginScreen').classList.add('hidden');$('#app').classList.remove('hidden');}
+ else{$('#app').classList.add('hidden');$('#loginScreen').classList.remove('hidden');}});
+ API.onProducts(s=>{products=s;renderProducts();stats();});
+ API.onOffers(s=>{offers=s;renderOffers();stats();});
+ API.onCategories(s=>{cats=s;renderCats();});
+ API.onSettings(s=>{settings={...settings,...(s||{})};$('#hdrName').textContent=settings.storeName;document.title=settings.storeName+' | لوحة النشر';
+ if(!settingsFilled){settingsFilled=true;$('#sName').value=settings.storeName||'';$('#sPhone').value=settings.phone||'';$('#sAddress').value=settings.address||'';$('#sCurrency').value=settings.currency||'';$('#sStorage').value=settings.storageMode||'base64';$('#sImgbbKey').value=settings.imgbbKey||'';$('#sImgbbKey').classList.toggle('hidden',settings.storageMode!=='imgbb');}
+ renderProducts();renderOffers();stats();});}
+
+/* ---------- الإقلاع ---------- */
+$('#projectIdTag').textContent = 'مشروع: '+firebaseConfig.projectId;
+if(DEMO){
+ API=makeLocalAPI(); lLoad();
+ $('#demoBanner').classList.remove('hidden');$('#demoNote').classList.remove('hidden');
+ $('#demoLoginBtn').classList.remove('hidden');$('#resetDemoBtn').classList.remove('hidden');
+ startListeners();
+}else{
+ makeFirebaseAPI().then(api=>{API=api;startListeners();}).catch(e=>{alert('تعذر تحميل Firebase: '+e.message);});
+}
+</script>
+</body>
+</html>
